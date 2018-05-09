@@ -1,0 +1,118 @@
+[
+    {
+        "id": "1a874be2.962b44",
+        "type": "inject",
+        "z": "83a9e580.c81df8",
+        "name": "",
+        "topic": "",
+        "payload": "{\"fields\":[\"Row\",\"Age\",\"Sex\",\"ChestPain\",\"RestBP\",\"Chol\",\"Fbs\",\"RestECG\",\"MaxHR\",\"ExAng\",\"Oldpeak\",\"Slope\",\"Ca\",\"Thal\",\"AHD\"],\"values\":[[-1,67,1,\"asymptomatic\",120,180,0,2,129,1,2.6,2,2,\"reversable\",\"NA\"]]}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "461040d0.a7eb4"
+            ]
+        ]
+    },
+    {
+        "id": "461040d0.a7eb4",
+        "type": "function",
+        "z": "83a9e580.c81df8",
+        "name": "Token header",
+        "func": "msg.fields=msg.payload;\nmsg.headers={\"Content-type\":\"application/json\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 100,
+        "wires": [
+            [
+                "3f9b6ac5.d11726"
+            ]
+        ]
+    },
+    {
+        "id": "3f9b6ac5.d11726",
+        "type": "http request",
+        "z": "83a9e580.c81df8",
+        "name": "Token request",
+        "method": "GET",
+        "ret": "txt",
+        "url": "https://ibm-watson-ml.mybluemix.net/v3/identity/token",
+        "tls": "",
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "2ad62507.6f5b0a"
+            ]
+        ]
+    },
+    {
+        "id": "2ad62507.6f5b0a",
+        "type": "function",
+        "z": "83a9e580.c81df8",
+        "name": "Grab token",
+        "func": "msg.token = JSON.parse(msg.payload).token;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 100,
+        "wires": [
+            [
+                "ba9378de.29b778"
+            ]
+        ]
+    },
+    {
+        "id": "ba9378de.29b778",
+        "type": "function",
+        "z": "83a9e580.c81df8",
+        "name": "Scoring header",
+        "func": "msg.headers={\"Content-type\": \"application/json\",\"Authorization\":\"Bearer \" + msg.token}\nmsg.payload=msg.fields;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "e9a13222.b0295"
+            ]
+        ]
+    },
+    {
+        "id": "e9a13222.b0295",
+        "type": "http request",
+        "z": "83a9e580.c81df8",
+        "name": "Scoring request",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://ibm-watson-ml.mybluemix.net/v3/wml_instances/9dfd0979-57ae-42d8-a1c3-802cba44df3b/published_models/7760af4a-cdc4-40bf-8a40-b080be08db89/deployments/3b74bd3c-2ffa-4f23-b81d-16b141696598/online",
+        "tls": "",
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "b83ab494.2d2f68"
+            ]
+        ]
+    },
+    {
+        "id": "b83ab494.2d2f68",
+        "type": "debug",
+        "z": "83a9e580.c81df8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 530,
+        "y": 300,
+        "wires": []
+    }
+]
