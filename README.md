@@ -1,6 +1,6 @@
 # Machine Learning con Watson Studio
 
-## Presentación
-[Presentación](https://ibm.box.com/v/ml-ppt)
+## Presentación Introducción a Machine Learing
+[Presentación Machine](https://ibm.box.com/v/ml-ppt)
 
 Watson Studio Hands-On
