@@ -78,3 +78,8 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 * Ahora ve a la pestaña _Visualization_ y crea un **Histograma** con variable x _CreditScore_ particionado por _Gender_
 * Descarga la grafica haciendo click en el icono de descargar.
 * Activa el flujo de datos haciendo click en el boton de play (Un triangulo).
+* Haz click en el boton _Save and Run_
+* En el dialogo emergente haz click en _View_ y espera a que el flujo termine.
+* Vuelve a tu proyecto haciendo click en el nombre del proyecto en el menú de navegación
+
+### 5. Trabajar con Watson Machine Learning
