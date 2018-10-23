@@ -1,7 +1,6 @@
 # Machine Learning con Watson Studio
 
-## Presentación Introducción a Machine Learing
-[Presentación Machine Learning](https://ibm.box.com/v/ml-ppt)
+> Presentación [Introducción a Machine Learning](https://ibm.box.com/v/ml-ppt)
 
 ## Componentes Incluidos
 * [Watson Studio](https://console.bluemix.net/catalog/services/watson-studio): Watson Studio es una herramienta end-to-end que permite desarrollar modelos de machine learning y deep learning combinando los principales proyectos Open Source y herramientas propias de IBM en la nube.
