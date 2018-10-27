@@ -117,6 +117,8 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 * En el campo Notebook URL copia la dirección `https://github.com/libardolara/watson-studio/blob/master/Churn_notebook.ipynb`
 * Selecciona como _Runtime_ el servicio de **Apache Spark** que asociaste al proyecto
 * Haz click en _Create Notebook_
+* Asegurate que el Kernel diga Python 3.5 y Spark 2.1 o mayor.
+* Sigue las instrucciones que estan en el Notebook.
 
 
 
