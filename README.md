@@ -51,9 +51,9 @@ Abre tu servicio de Watson Studio ya sea en [dashboard de IBM Cloud](https://con
 
 ### 4. Trabajar con un Data Set
 
-* En la pestaña de _Assests_ en la sección _Load_ arrastra el archivo [Churn.csv](Churn.csv)
+* En la pestaña de _Assests_ en la sección _Load_ arrastra el archivo [Churn_ds.csv](Churn_ds.csv)
 * Al cargar un archivo se crea automaticamnte un _Data Asset_. Haz click en el _Data Asset_.
-* Analiza los datos, si necesitas entender el contexto de las columnas encuentra la metadata en [Churn.txt](Churn.txt)
+* Analiza los datos, si necesitas entender el contexto de las columnas encuentra la metadata en [Churn_metadata.txt](Churn_metadata.txt)
 * Haz click en _Refine_
 
 > En este punto vamos a usar el servicio **Data Refinery** para crear un flujo de modificación de los datos.
