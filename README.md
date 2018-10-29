@@ -120,7 +120,61 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 * Asegurate que el Kernel diga Python 3.5 y Spark 2.1 o mayor.
 * Sigue las instrucciones que estan en el Notebook.
 
+### 7. Usar el modelo desde Node-RED
 
+* En el catalogo de IBM Cloud, crea el servicio de [Node-RED](https://console.bluemix.net/catalog/starters/node-red-starter)
+* Dale un nombre único a la aplicación, este nombre será usado para crear un subdominio web.
+* Haz click en _Crear_
+* Espera a que la aplicación inicialice
+*	De la pestaña “input” arrastre el bloque “inject”
+*	De doble click sobr este bloque y en la celda de “Payload” seleccione “JSON”
+* Bajo la pestaña “Function” arrastre el bloque “function” y conéctelo después del bloque “inject”
+* De doble click sobre este bloque que acaba de agregar y en la celda “Name” coloque “Token Header”. Luego en la casilla “Function” copie el siguiente código y péguelo reemplazando todo el campo:
 
+```javascript
+msg.fields = msg.payload;
+msg.headers={"Content-type": "application/json"};
+return msg;
+```
 
+*	En la pestaña “Function” arrastre el bloque “http request” y conéctelo después del bloque del punto anterior.
+* De doble click sobre el bloque de “http request” y realice la siguiente configuración en las siguientes celdas:
 
+“Method” -> GET
+“URL” -> https://ibm-watson-ml.mybluemix.net/v3/identity/token
+Marque la casilla “Use basic authentication”. Esto habilitará las celdas “username” y “password”. Estas celdas deben ser llenadas con el usuario y contraseña de su servicio de Watson Machine Learning.
+“Name” -> Token request
+
+*	Bajo la pestaña “Function” agregue el bloque llamado “function”. Arrástrelo y conéctelo después del bloque del punto anterior.
+* De doble click sobre este bloque que acaba de arrastrar y en la celda “Name” escriba “Grab Token”. Luego en la celda “Function” agregue la siguiente línea de código en la primera línea:
+
+```javascript
+msg.token = JSON.parse(msg.payload).token;
+return msg;
+```
+
+*	Arrastre otro bloque de “function” bajo la pestaña “Function” y conéctelo con el bloque anterior.
+* De doble click sobre el bloque que acaba d arrastrar y nómbrelo “Scoring Header”. Luego, en la celda “Function” copie el siguiente código y péguelo en la primera línea:
+
+```javascript
+msg.headers={"Content-type": "application/json","Authorization":"Bearer " + msg.token}; 
+msg.payload=msg.fields;
+return msg;
+```
+
+*	Arrastre otro bloque “http request” de la pestaña “Functions” y conéctelo al bloque del punto anterior.
+
+De doble click a este bloque recién agregado y en la celda “Name” escriba “Scoring request”, en “Method” seleccione “POST” y en la celda de “URL” pegue la URL de su modelo que se puede obtener entrando a **Watson Studio** -> Entra a su proyecto -> Models -> Click sobre su modelo -> Click a pestaña “Deployments” -> Entre al deployment -> Click a la pestaña “Implementation”. En esta parte deberá ver de primero “Scoring End-point”. 
+
+Esta es la URL del modelo que pegaremos en la celda de “URL” de este bloque de “Http Request”
+
+*	Para terminar el flujo de bloques ir a la pestaña “Outputs” y arrastre el bloque “debug” y conéctelo después del bloque del punto anterior. De doble click al bloque de debug  y cambie el nombre a “Prediction”.
+* Para usar el flujo de doble click a al bloque de inject y en la celda de “Payload” pegue lo siguiente:
+
+```json
+{"fields":["CreditScore","Geography","Gender","Age","Tenure","Balance","NumOfProducts","HasCrCard","IsActiveMember","EstimatedSalary"],"values":[[500,"Spain","Male",50,2,10000,2,1,0,40000]]}
+```
+
+* Luego despliegue dando click en el botón “Deploy” que se encuentra en la equina superior derecho de la página
+* Una vez desplegado vaya al bloque “inject” y presione el botón.
+* En el panel de la derecha en la pestaña “Debug” deberá ver la respuesta del modelo.
