@@ -142,9 +142,11 @@ return msg;
 * De doble click sobre el bloque de “http request” y realice la siguiente configuración en las siguientes celdas:
 
 “Method” -> GET
-“URL” -> https://ibm-watson-ml.mybluemix.net/v3/identity/token
+“URL” -> https://us-south.ml.cloud.ibm.com/v3/identity/token
 Marque la casilla “Use basic authentication”. Esto habilitará las celdas “username” y “password”. Estas celdas deben ser llenadas con el usuario y contraseña de su servicio de Watson Machine Learning.
 “Name” -> Token request
+
+> La base url https://us-south.ml.cloud.ibm.com depende de la región en que se desplegó el servicio (Dallas, Londres, Frankfurt o Tokio) Si tienes dudas del endpoint correcto, puedes revisar en las credenciales del servicio **Watson Machine Learning**
 
 *	Bajo la pestaña “Function” agregue el bloque llamado “function”. Arrástrelo y conéctelo después del bloque del punto anterior.
 * De doble click sobre este bloque que acaba de arrastrar y en la celda “Name” escriba “Grab Token”. Luego en la celda “Function” agregue la siguiente línea de código en la primera línea:
