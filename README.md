@@ -4,7 +4,6 @@
 
 ## Componentes Incluidos
 * [Watson Studio](https://cloud.ibm.com/catalog/services/watson-studio): Watson Studio es una herramienta end-to-end que permite desarrollar modelos de machine learning y deep learning combinando los principales proyectos Open Source y herramientas propias de IBM en la nube.
-* [Analytics Engine](https://cloud.ibm.com/catalog/services/analytics-engine): Un framework para desarrollar y desplegar aplicaciones analiticas usando Apache Spark y Apache Hadoop.
 * [Jupyter Notebook](http://jupyter.org/): Es una aplicación web Open Source que le permite crear y compartir documentos que contienen código en vivo, ecuaciones, visualizaciones y texto narrativo.
 
 # Prerequisitos
@@ -26,8 +25,6 @@ $ git clone https://github.com/libardolara/watson-studio
 
 * Crea el servicio [Object Storage](https://cloud.ibm.com/catalog/services/cloud-object-storage)
 * Crea el servicio [Watson Studio](https://cloud.ibm.com/catalog/services/watson-studio)
-* Crea el servicio [Analytics Engine](https://cloud.ibm.com/catalog/services/analytics-engine)
-** Configura el servicio de **Analytics Engine** con el hardware por defecto, 1 Nodo de computo, y el paquete de software `AE 1.1 Spark` 
 * Crea el servicio [Machine Learning](https://cloud.ibm.com/catalog/services/machine-learning)
 
 ### 3. Crear un Proyecto en Watson Studio
@@ -39,13 +36,11 @@ Abre tu servicio de Watson Studio ya sea en [dashboard de IBM Cloud](https://clo
 * Asegurate que en Storage este escogido el servicio de **Object Storage** que creaste en el numeral anterior. Si no esta seleccionado debes hacer click en _Add > Existing_ y selecciona de la lista desplegable el servicio.
 * Haz click en _Create_
 
-> Vamos a agregar al proyecto servicios adicionales como _Analytics Engine_ y _Watson Machine Learning_
+> Vamos a agregar al proyecto servicios adicionales como _Watson Machine Learning_
 
 * Haz click en la pestaña _Settings_
 * Navega hacia abajo hasta la sección _Associated Services_ 
-* Haz click en _Add Service_ y selecciona _IBM Analytics Engine_
-* En la pestaña _Existing_ selecciona tu servicio de **Analytics Engine**
-* La herramienta te redirige automaticament a la sección de _Associated Services_, haz click en _Add Service_ y selecciona _Watson_
+* Haz click en _Add Service_ y selecciona _Watson_
 * En la lista de servicios de _Watson_ haz click _Add_ para el servicio de _Machine Learning_
 * En la pestaña _Existing_ selecciona tu servicio de **Machine Learning**
 * La herramienta te redirige al proyecto en la sección _Associated Services_
@@ -116,7 +111,7 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 * Selecciona la pestaña _From URL_
 * Dale un nombre al Notebook
 * En el campo Notebook URL copia la dirección `https://github.com/libardolara/watson-studio/blob/master/Churn_notebook.ipynb`
-* Selecciona como _Runtime_ el servicio de **Analytics Engine** que asociaste al proyecto
+* Selecciona como _Runtime_ el servicio ambiente por defecto con pytho 3.5 y Spark: _Default Spark Python 3.5 XS_
 * Haz click en _Create Notebook_
 * Asegurate que el Kernel diga Python 3.5 y Spark 2.1 o mayor.
 * Sigue las instrucciones que estan en el Notebook.
