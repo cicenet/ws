@@ -36,31 +36,52 @@ Abre tu servicio de Watson Studio ya sea en [dashboard de IBM Cloud](https://clo
 * Asegurate que en Storage este escogido el servicio de **Object Storage** que creaste en el numeral anterior. Si no esta seleccionado debes hacer click en _Add > Existing_ y selecciona de la lista desplegable el servicio.
 * Haz click en _Create_
 
+![](img/ws_new_project.png)
+
 > Vamos a agregar al proyecto servicios adicionales como _Watson Machine Learning_
 
 * Haz click en la pestaña _Settings_
 * Navega hacia abajo hasta la sección _Associated Services_ 
 * Haz click en _Add Service_ y selecciona _Watson_
+
+![](img/ws_add_service.png)
+
 * En la lista de servicios de _Watson_ haz click _Add_ para el servicio de _Machine Learning_
+
+![](img/ws_services.png)
+
 * En la pestaña _Existing_ selecciona tu servicio de **Machine Learning**
+
+![](img/ws_existing_services.png)
+
 * La herramienta te redirige al proyecto en la sección _Associated Services_
 
 ### 4. Trabajar con un Data Set
 
 * En la pestaña de _Assests_ en la sección _Load_ arrastra el archivo [Churn_ds.csv](Churn_ds.csv)
-* Al cargar un archivo se crea automaticamnte un _Data Asset_. Haz click en el _Data Asset_.
+
+![](img/ws_add_data.png)
+
+* Al cargar un archivo se crea automaticamnte un _Data Asset_. Haz click en el _Data Asset_ con el nombre **Churn_ds.csv**.
 * Analiza los datos, si necesitas entender el contexto de las columnas encuentra la metadata en [Churn_metadata.txt](Churn_metadata.txt)
 * Haz click en _Refine_
+
+![](img/ws_refine.png)
 
 > En este punto vamos a usar el servicio **Data Refinery** para crear un flujo de modificación de los datos.
 
 * Haz click en el menú de los 3 puntos para la Columna _RowNumber_ y selecciona la opción _Remove_
+
+![](img/ws_refine_delete.png)
+
 * Repite el punto anterior para las columnas _CustomerID_ y _Surname_
 * En el campo Operation pega el siguiente codigo para cambiar los campos que deberian ser enteros
 
 ```
 mutate_at(vars('CreditScore','Age','Tenure','NumOfProducts','HasCrCard','IsActiveMember','Exited'),funs(as.integer))
 ```
+
+![](img/ws_refine_code.png)
 
 > **Data Refinery** permite usar codigo R para modificar las columnas del data set.
 
@@ -71,48 +92,85 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 ```
 
 * Ahora ve a la pestaña _Profile_ y observa la distribución de cada columna.
+
+![](img/ws_refine_profile.png)
+
 * Ahora ve a la pestaña _Visualization_ y crea un **Histograma** con variable x _CreditScore_ particionado por _Gender_
 * Descarga la grafica haciendo click en el icono de descargar.
-* Activa el flujo de datos haciendo click en el boton de play (Un triangulo).
-* Haz click en el boton _Save and Run_
+
+![](img/ws_refine_visualization.png)
+
+* Activa el flujo de datos haciendo click en el botón de play (Un triangulo).
+* Haz click en el botón _Save and Run_
 * En el dialogo emergente haz click en _View_ y espera a que el flujo termine.
 * Vuelve a tu proyecto haciendo click en el nombre del proyecto en el menú de navegación
+
+![](img/ws_new_data.png)
 
 ### 5. Trabajar con Watson Machine Learning
 
 * En el panel de _Assets_ navega hacia abajo a la sección de _Watson Machine Learning_
 * Haz click en _New Watson Machine Learning model_
+
+![](img/ws_add_model.png)
+
 * Dale un nombre a modelo
 * Selecciona en _Runtime_ el ambiente _Default Spark Scala 2.11_
 * Selecciona la opción _Manual_ para poder seleccionar los modelos que se probaran.
 * Haz click en _Create_ para crear el modelo
+
+![](img/ws_create_model.png)
+
 * En el paso _Data Assets_, selecciona el set que se creo apartir del Data Flow del numeral anterior.
 * Haz click en _Next_
 * En el paso _Technique_ selecciona como _Column value to predict_ la columna objetivo _Exited_
 * Asegurate que la tecnica sugerida sea _Binary Classification_
+
+![](img/ws_config_model.png)
+
 * Haz click en _Add Estimators_ para seleccionar los modelos que evaluaremos.
 * Selecciona todos los estimadores y haz click en _Add_
+
+![](img/ws_add_estimators.png)
+
 * Haz click en _Next_ para que comience el entrenamiento de los modelos.
 * Espera a que los modelos terminen de entrenar.
 * Analiza los resultados de los modelos
-* Selecciona el mejor model, tipicamente es el _RandomForestClassifier_ y haz click en el boton _Save_
+* Selecciona el mejor model, tipicamente es el _RandomForestClassifier_ y haz click en el botón _Save_
+
+![](img/ws_model_results.png)
+
 * Ve al tab _Deployments_ y haz click en _Add Deployment_
 * Dale un nombre al Despliegue
 * Selecciona el metodo de despliege _Web Service_
 * Haz click en _Save_
+
+![](img/ws_create_deploy.png)
+
 * Espera hasta que el estado del despliegue diga `DEPLOY_SUCCESS` y haz click sobre el nombre del despliegue.
+
+![](img/ws_deploy_select.png)
+
 * Navega en la pestaña _Implementation_ para entender como hacer los llamados a través de REST APIs
 * Navega en la pestaña _Test_ y haz un llamado al modelo.
+
+![](img/ws_deploy_test.png)
 
 ### 6. Trabajar con Notebooks
 
 * Vuelve a tu proyecto, a la pestaña _Assets_ y navega a la sección _Notebooks_
 * Haz click en _New notebook_
+
+![](img/ws_create_notebook.png)
+
 * Selecciona la pestaña _From URL_
 * Dale un nombre al Notebook
 * En el campo Notebook URL copia la dirección `https://github.com/libardolara/watson-studio/blob/master/Churn_notebook.ipynb`
 * Selecciona como _Runtime_ el servicio ambiente por defecto con pytho 3.5 y Spark: _Default Spark Python 3.5 XS_
 * Haz click en _Create Notebook_
+
+![](img/ws_config_notebook.png)
+
 * Asegurate que el Kernel diga Python 3.5 y Spark 2.1 o mayor.
 * Sigue las instrucciones que estan en el Notebook.
 
@@ -133,6 +191,8 @@ msg.headers={"Content-type": "application/json"};
 return msg;
 ```
 
+![](img/ws_node_func.png)
+
 *	En la pestaña “Function” arrastre el bloque “http request” y conéctelo después del bloque del punto anterior.
 * De doble click sobre el bloque de “http request” y realice la siguiente configuración en las siguientes celdas:
 
@@ -140,6 +200,8 @@ return msg;
 “URL” -> https://us-south.ml.cloud.ibm.com/v3/identity/token
 Marque la casilla “Use basic authentication”. Esto habilitará las celdas “username” y “password”. Estas celdas deben ser llenadas con el usuario y contraseña de su servicio de Watson Machine Learning.
 “Name” -> Token request
+
+![](img/ws_node_auth.png)
 
 > La base url https://us-south.ml.cloud.ibm.com depende de la región en que se desplegó el servicio (Dallas, Londres, Frankfurt o Tokio) Si tienes dudas del endpoint correcto, puedes revisar en las credenciales del servicio **Watson Machine Learning**
 
@@ -166,6 +228,8 @@ De doble click a este bloque recién agregado y en la celda “Name” escriba �
 
 Esta es la URL del modelo que pegaremos en la celda de “URL” de este bloque de “Http Request”
 
+![](img/ws_node_model.png)
+
 *	Para terminar el flujo de bloques ir a la pestaña “Outputs” y arrastre el bloque “debug” y conéctelo después del bloque del punto anterior. De doble click al bloque de debug  y cambie el nombre a “Prediction”.
 * Para usar el flujo de doble click a al bloque de inject y en la celda de “Payload” pegue lo siguiente:
 
@@ -173,6 +237,10 @@ Esta es la URL del modelo que pegaremos en la celda de “URL” de este bloque 
 {"fields":["CreditScore","Geography","Gender","Age","Tenure","Balance","NumOfProducts","HasCrCard","IsActiveMember","EstimatedSalary"],"values":[[500,"Spain","Male",50,2,10000,2,1,0,40000]]}
 ```
 
+![](img/ws_node_inyect.png)
+
 * Luego despliegue dando click en el botón “Deploy” que se encuentra en la equina superior derecho de la página
 * Una vez desplegado vaya al bloque “inject” y presione el botón.
 * En el panel de la derecha en la pestaña “Debug” deberá ver la respuesta del modelo.
+
+![](img/ws_node_test.png)
