@@ -98,9 +98,13 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 * Ahora ve a la pestaña _Visualization_ y crea un **Histograma** con variable x _CreditScore_ particionado por _Gender_
 * Descarga la grafica haciendo click en el icono de descargar.
 
-![](img/ws_refine_visualization.png)
+![](img/ws_refine_config_env.png)
 
 * Activa el flujo de datos haciendo click en el botón de play (Un triangulo).
+* En la configuración de la ejecución del flujo de datos, configura el ambiente de ejecución _PROJECT SPARK ENVIRONMENT_ con el ambiente **Default Spark R 3.4** o superior.
+
+![](img/ws_refine_visualization.png)
+
 * Haz click en el botón _Save and Run_
 * En el dialogo emergente haz click en _View_ y espera a que el flujo termine.
 * Vuelve a tu proyecto haciendo click en el nombre del proyecto en el menú de navegación
