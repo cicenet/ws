@@ -111,20 +111,26 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 
 ![](img/ws_new_data.png)
 
-### 5. Trabajar con AutoAI
-
-
 ### 5. Trabajar con AutoAI Experiment
 
 AutoAI Experiments permite de forma automatica preparar, modelar y sintonizar los parametros para el mejor modelo de machinie learning.
 
 * Haz click en el botón **Add to project**
 * En el panel emergente selecciona la opción **AutoAI Experiment**
+
+![](img/ws_autoai_create.png)
+
 * Ingresa un nombre al Asset
 * Asegurate que el servicio de _Watson Machine Learning_ este escogido. Si no esta seleccionado debes hacer click en link **Associate a Machine Learning service instance** y selecciona de la lista desplegable el servicio. Finalmente haz click en el botón **Reload**
+
+![](img/ws_autoai_details.png)
+
 * En la pagina de configuracion del experimento, haz click en el boton **Select from project** para seleccionar el data set que creamos en el numeral anterior.
 * Selecciona el data set creado en el numeral anterior.
 * Selecciona la columna objetivo de nuestro modelo, es decir **Exited** que indica si una persona se quedó o se fue del banco.
+
+![](img/ws_autoai_config.png)
+
 * Haz click en **Run Experiment**
 
 ### 6. Trabajar con Notebooks
