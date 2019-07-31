@@ -100,13 +100,14 @@ mutate_at(vars('Balance','EstimatedSalary'),funs(as.numeric))
 
 ![](img/ws_refine_visualization.png)
 
-* Activa el flujo de datos haciendo click en el botón de play (Un triangulo).
-* En la configuración de la ejecución del flujo de datos, configura el ambiente de ejecución _PROJECT SPARK ENVIRONMENT_ con el ambiente **Default Spark R 3.4** o superior.
+* Activa el flujo de datos haciendo click en el botón de ejecución (Un triangulo) en la el menú superior.
+* Selecciona la opción **Save and create Job**
+* En la configuración de la ejecución del flujo de datos, configura el ambiente de ejecución con el ambiente **Default Spark R 3.4** o superior.
 
-![](img/ws_refine_config_env.png)
+![](img/ws_refine_job.png)
 
-* Haz click en el botón _Save and Run_
-* En el dialogo emergente haz click en _View_ y espera a que el flujo termine.
+* Haz click en el botón _Create and Run_
+* Espera a que el flujo termine su ejecución.
 * Vuelve a tu proyecto haciendo click en el nombre del proyecto en el menú de navegación
 
 ![](img/ws_new_data.png)
