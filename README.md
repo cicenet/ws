@@ -133,10 +133,19 @@ AutoAI Experiments permite de forma automatica preparar, modelar y sintonizar lo
 
 * Haz click en **Run Experiment**
 * Cuando termine de ejecutarse el experimento, observa los diferentes resultados que obtuvo en la sección **Pipeline Leaderboard**
+
+![](img/ws_autoai_results.png)
+
 * Selecciona el flujo con el mejor resultado (ROC AUC)
 * Detalla las diferentes medidas de evaluación del modelo.
+
+![](img/ws_autoai_rdetails.png)
+
 * Haz click en el botón **Save as model**
 * Puedes cambiar el nombre. Haz click en el botón **Save**
+
+![](img/ws_autoai_save.png)
+
 * Ve a la pagina de _Assets_ de tu proyecto, en la sección modelos **Watson Machine Learning**, encontraras el modelo que acabamos de guardar. Haz click en el modelo.
 * Ve al tab _Deployments_ y haz click en _Add Deployment_
 * Dale un nombre al Despliegue
