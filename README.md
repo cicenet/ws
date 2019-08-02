@@ -195,42 +195,55 @@ AutoAI Experiments permite de forma automatica preparar, modelar y sintonizar lo
 * De doble click sobre este bloque que acaba de agregar y en la celda “Name” coloque “Token Header”. Luego en la casilla “Function” copie el siguiente código y péguelo reemplazando todo el campo:
 
 ```javascript
-msg.fields = msg.payload;
-msg.headers={"Content-type": "application/json"};
+msg.fields=msg.payload;
+msg.headers={"Content-type":"application/x-www-form-urlencoded",
+"Accept":"application/json"};
+
+//TODO Agregar el apikey de las credeciales de Watson Machine Learning
+apikey = "";
+
+msg.payload = "apikey=" + apikey + "&grant_type=urn:ibm:params:oauth:grant-type:apikey";
 return msg;
 ```
+* No te olvides de copiar tu **apikey** en el codigó anterior, recuerda que esta información esta en las credenciales de tu servicio **Watson Machine Learning**
 
 ![](img/ws_node_func.png)
 
 *	En la pestaña “Function” arrastre el bloque “http request” y conéctelo después del bloque del punto anterior.
 * De doble click sobre el bloque de “http request” y realice la siguiente configuración en las siguientes celdas:
 
-“Method” -> GET
-“URL” -> https://us-south.ml.cloud.ibm.com/v3/identity/token
-Marque la casilla “Use basic authentication”. Esto habilitará las celdas “username” y “password”. Estas celdas deben ser llenadas con el usuario y contraseña de su servicio de Watson Machine Learning.
+“Method” -> POST
+“URL” -> https://iam.bluemix.net/identity/token
 “Name” -> Token request
 
 ![](img/ws_node_auth.png)
 
-> La base url https://us-south.ml.cloud.ibm.com depende de la región en que se desplegó el servicio (Dallas, Londres, Frankfurt o Tokio) Si tienes dudas del endpoint correcto, puedes revisar en las credenciales del servicio **Watson Machine Learning**
+> Si deseas mayor información en la forma de autenticacion para el servicio **Watson Machine Learning**, revisa la [Documentación](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/ml-authentication.html)
 
 *	Bajo la pestaña “Function” agregue el bloque llamado “function”. Arrástrelo y conéctelo después del bloque del punto anterior.
-* De doble click sobre este bloque que acaba de arrastrar y en la celda “Name” escriba “Grab Token”. Luego en la celda “Function” agregue la siguiente línea de código en la primera línea:
+* De doble click sobre este bloque que acaba de arrastrar y en la celda “Name” escriba `Grab Token`. Luego en la celda “Function” agregue la siguiente línea de código en la primera línea:
 
 ```javascript
-msg.token = JSON.parse(msg.payload).token;
+msg.token = JSON.parse(msg.payload).access_token;
 return msg;
 ```
 
 *	Arrastre otro bloque de “function” bajo la pestaña “Function” y conéctelo con el bloque anterior.
-* De doble click sobre el bloque que acaba d arrastrar y nómbrelo “Scoring Header”. Luego, en la celda “Function” copie el siguiente código y péguelo en la primera línea:
+* De doble click sobre el bloque que acabas de arrastrar y nómbrelo “Scoring Header”. Luego, en la celda “Function” copie el siguiente código y péguelo en la primera línea:
 
 ```javascript
-msg.headers={"Content-type": "application/json","Authorization":"Bearer " + msg.token}; 
+//TODO Agregar el instance id de las credenciales de Watson Machine Learning
+instance_id = "" ;
+
+msg.headers={"Content-type": "application/json",
+"Authorization":"Bearer " + msg.token,
+"ML-Instance-ID": instance_id
+};
 msg.payload=msg.fields;
 return msg;
 ```
 
+* No te olvides de copiar tu **instance_id** en el codigó anterior, recuerda que esta información esta en las credenciales de tu servicio **Watson Machine Learning**
 *	Arrastre otro bloque “http request” de la pestaña “Functions” y conéctelo al bloque del punto anterior.
 
 De doble click a este bloque recién agregado y en la celda “Name” escriba “Scoring request”, en “Method” seleccione “POST” y en la celda de “URL” pegue la URL de su modelo que se puede obtener entrando a **Watson Studio** -> Entra a su proyecto -> Models -> Click sobre su modelo -> Click a pestaña “Deployments” -> Entre al deployment -> Click a la pestaña “Implementation”. En esta parte deberá ver de primero “Scoring End-point”. 
