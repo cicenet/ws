@@ -175,7 +175,7 @@ AutoAI Experiments permite de forma automatica preparar, modelar y sintonizar lo
 * Selecciona la pestaña _From URL_
 * Dale un nombre al Notebook
 * En el campo Notebook URL copia la dirección `https://github.com/libardolara/watson-studio/blob/master/Churn_notebook_py36.ipynb`
-* Selecciona como _Runtime_ el servicio ambiente por defecto con pytho 3.6 y Spark: _Default Spark Python 3.6 XS_ o sin Spark: _Default Python 3.6 XS_
+* Selecciona como _Runtime_ el servicio ambiente por defecto con pytho 3.6: _Default Python 3.6 XS_
 * Haz click en _Create Notebook_
 
 ![](img/ws_config_notebook.png)
