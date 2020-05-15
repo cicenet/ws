@@ -10,6 +10,12 @@
 
 * Cuenta activa de [IBM Cloud](https://cloud.ibm.com)
 
+# Ver los videos
+Este repositorio cubre los videos del siguiente listado
+
+
+[![](https://img.youtube.com/vi/zzkY5SQNPrY/0.jpg)](https://www.youtube.com/watch?v=CwB6J3SlgvA&list=PLSMvxXwhRqaGJi4iM5UuhjiAxDrGvUHPO&index=1)
+
 # Paso a Paso
 
 ### 1. Clonar el repo
