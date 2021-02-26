@@ -180,13 +180,13 @@ AutoAI Experiments permite de forma automatica preparar, modelar y sintonizar lo
 
 * Selecciona la pestaña _From URL_
 * Dale un nombre al Notebook
-* En el campo Notebook URL copia la dirección `https://github.com/libardolara/watson-studio/blob/master/Churn_notebook_py36.ipynb`
-* Selecciona como _Runtime_ el servicio ambiente por defecto con pytho 3.6: _Default Python 3.6 XS_
+* En el campo Notebook URL copia la dirección `https://github.com/libardolara/watson-studio/blob/master/Churn_notebook_py37.ipynb`
+* Selecciona como _Runtime_ el servicio ambiente por defecto con python 3.7: _Default Python 3.7 XS_
 * Haz click en _Create Notebook_
 
 ![](img/ws_config_notebook.png)
 
-* Asegurate que el Kernel diga Python 3.6.
+* Asegurate que el Kernel diga Python 3.7.
 * Sigue las instrucciones que estan en el Notebook.
 
 ### 7. Usar el modelo desde Node-RED
